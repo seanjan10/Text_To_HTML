@@ -20,7 +20,7 @@ def index(request):
             #print(x)
             convertedString =  "<p>{str}</p>".format(str=n)
             print(convertedString)
-            return render(request, 'convertedText.html', {"convertedString":convertedString})
+            return render(request, 'generator.html', {"form":form, "convertedString":convertedString})
             #return HttpResponse(convertedString)
 
 
