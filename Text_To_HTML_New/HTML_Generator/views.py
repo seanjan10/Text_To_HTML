@@ -23,6 +23,7 @@ def index(request):
                 convertedHTMLPage = "<!DOCTYPE HTML>\n<html>\n<head>\n<title> Generated HTML Page </title> \n</head> \n<body>\n {str} \n </body> \n </html>".format(str=convertedString)
             else:
                 convertedString=""
+                convertedHTMLPage = ""
 
                 
             print(convertedString)
