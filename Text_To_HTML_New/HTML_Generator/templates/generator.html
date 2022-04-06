@@ -63,7 +63,7 @@
 									
 									<p style="text-align:center">			
 										<button type="submit", name="save", class="btn btn-primary">Convert</button>
-										<button type="reset", value="reset" class="btn btn-secondary">Reset</button>
+										<!--<button type="reset", value="reset" class="btn btn-secondary">Reset</button> -->
 									</p>
 							
 								<br>
@@ -76,9 +76,28 @@
                   <textarea id="newText" name="newText" rows="10" cols="84" spellcheck="false">{{convertedString}}</textarea> 
                   </div>
 								 
+
+                  <h5 class ="card-header" style="text-align:center"> HTML generated File </h5>
+									<!--<textarea id="newText" name="newText" rows="6" cols="36" spellcheck="false">{{convertedString}}</textarea> -->
+                  <div style="width:600px; margin:0 auto;">
+                  <!--{{form.enterHTML_Convert}} -->
+                  <textarea id="generatedText" name="generatedText" rows="10" cols="84" spellcheck="false">{{convertedHTMLPage}}</textarea> 
+
+                  <p style="text-align:center">			
+										<input type="button", class="btn btn-secondary" id="download" value="Download"></button>
+										<!--<button type="reset", value="reset" class="btn btn-secondary">Reset</button> -->
+									</p>
+                  </div>
+								 
 							  
 								
 								</div>
+							  
+								
+								</div>
+
+
+                
 							</div>
         </form> 
 		
@@ -90,6 +109,49 @@
           new nicEditor().panelInstance('{{form.enterHTML.id_for_label}}');
         });
       </script>
+
+      <script src="http://code.jquery.com/jquery-1.10.2.js"></script>
+      <!--Source of code is Jobelle on Stack Overflow https://stackoverflow.com/questions/35148578/download-a-text-file-from-textarea-on-button-click -->
+      <!--script that allows the user to be able to download a generated file that includes their generated text-->
+      <script>
+        
+        $(document).ready(function () {
+            function saveTextAsFile() {
+                var textToWrite = document.getElementById("generatedText").value;
+                //  create a new Blob (html5 magic) that conatins the data from your form feild
+                var textFileAsBlob = new Blob([textToWrite], { type: 'text/plain' });
+                // Specify the name of the file to be saved
+                var fileNameToSaveAs = "myGeneratedFile.html";
+                var downloadLink = document.createElement("a");
+                downloadLink.download = fileNameToSaveAs;
+                downloadLink.innerHTML = "My Hidden Link";
+                window.URL = window.URL || window.webkitURL;
+    
+                // Create the link Object.
+                downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+                // when link is clicked call a function to remove it from
+                // the DOM in case user wants to save a second file.
+                downloadLink.onclick = destroyClickedElement;
+                // make sure the link is hidden.
+                downloadLink.style.display = "none";
+                // add the link to the DOM
+                document.body.appendChild(downloadLink);
+    
+                // click the new link
+                downloadLink.click();
+            }  
+            function destroyClickedElement(event) {
+                // remove the link from the DOM
+                document.body.removeChild(event.target);
+            }
+            $("#download").click(function (e) {
+                e.preventDefault();
+                saveTextAsFile();
+            });
+     });  
+    </script>
+
+
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
