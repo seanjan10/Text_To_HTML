@@ -18,9 +18,15 @@ def index(request):
             #print(n)
            # x = n.replace("\n", " NL ")
             #print(x)
-            convertedString =  "<p>{str}</p>".format(str=n)
+            if len(n) > 0:
+                convertedString =  "<p>{str}</p>".format(str=n)
+                convertedHTMLPage = "<!DOCTYPE HTML>\n<html>\n<head>\n<title> Generated HTML Page </title> \n</head> \n<body>\n {str} \n </body> \n </html>".format(str=convertedString)
+            else:
+                convertedString=""
+
+                
             print(convertedString)
-            return render(request, 'generator.html', {"form":form, "convertedString":convertedString})
+            return render(request, 'generator.html', {"form":form, "convertedString":convertedString, "convertedHTMLPage":convertedHTMLPage})
             #return HttpResponse(convertedString)
 
 
